@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as Demo1RouteImport } from './routes/demo-1'
 import { Route as Demo2RouteImport } from './routes/demo-2'
+import { Route as Demo1IndexRouteImport } from './routes/demo-1.index'
+import { Route as Demo1AboutRouteImport } from './routes/demo-1.about'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,34 +30,49 @@ const Demo2Route = Demo2RouteImport.update({
   path: '/demo-2',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Demo1IndexRoute = Demo1IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => Demo1Route,
+} as any)
+const Demo1AboutRoute = Demo1AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => Demo1Route,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demo-1': typeof Demo1Route
+  '/demo-1': typeof Demo1RouteWithChildren
   '/demo-2': typeof Demo2Route
+  '/demo-1/about': typeof Demo1AboutRoute
+  '/demo-1/': typeof Demo1IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo-1': typeof Demo1Route
   '/demo-2': typeof Demo2Route
+  '/demo-1/about': typeof Demo1AboutRoute
+  '/demo-1': typeof Demo1IndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/demo-1': typeof Demo1Route
+  '/demo-1': typeof Demo1RouteWithChildren
   '/demo-2': typeof Demo2Route
+  '/demo-1/about': typeof Demo1AboutRoute
+  '/demo-1/': typeof Demo1IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo-1' | '/demo-2'
+  fullPaths: '/' | '/demo-1' | '/demo-2' | '/demo-1/about' | '/demo-1/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo-1' | '/demo-2'
-  id: '__root__' | '/' | '/demo-1' | '/demo-2'
+  to: '/' | '/demo-2' | '/demo-1/about' | '/demo-1'
+  id: '__root__' | '/' | '/demo-1' | '/demo-2' | '/demo-1/about' | '/demo-1/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  Demo1Route: typeof Demo1Route
+  Demo1Route: typeof Demo1RouteWithChildren
   Demo2Route: typeof Demo2Route
 }
 
@@ -82,12 +99,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Demo2RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo-1/': {
+      id: '/demo-1/'
+      path: '/'
+      fullPath: '/demo-1/'
+      preLoaderRoute: typeof Demo1IndexRouteImport
+      parentRoute: typeof Demo1Route
+    }
+    '/demo-1/about': {
+      id: '/demo-1/about'
+      path: '/about'
+      fullPath: '/demo-1/about'
+      preLoaderRoute: typeof Demo1AboutRouteImport
+      parentRoute: typeof Demo1Route
+    }
   }
 }
 
+interface Demo1RouteChildren {
+  Demo1AboutRoute: typeof Demo1AboutRoute
+  Demo1IndexRoute: typeof Demo1IndexRoute
+}
+
+const Demo1RouteChildren: Demo1RouteChildren = {
+  Demo1AboutRoute: Demo1AboutRoute,
+  Demo1IndexRoute: Demo1IndexRoute,
+}
+
+const Demo1RouteWithChildren = Demo1Route._addFileChildren(Demo1RouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  Demo1Route: Demo1Route,
+  Demo1Route: Demo1RouteWithChildren,
   Demo2Route: Demo2Route,
 }
 export const routeTree = rootRouteImport
