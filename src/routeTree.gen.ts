@@ -14,6 +14,8 @@ import { Route as Demo1RouteImport } from './routes/demo-1'
 import { Route as Demo2RouteImport } from './routes/demo-2'
 import { Route as Demo1IndexRouteImport } from './routes/demo-1.index'
 import { Route as Demo1AboutRouteImport } from './routes/demo-1.about'
+import { Route as Demo1ContactRouteImport } from './routes/demo-1.contact'
+import { Route as Demo1ServicesRouteImport } from './routes/demo-1.services'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,18 +42,32 @@ const Demo1AboutRoute = Demo1AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => Demo1Route,
 } as any)
+const Demo1ContactRoute = Demo1ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => Demo1Route,
+} as any)
+const Demo1ServicesRoute = Demo1ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => Demo1Route,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demo-1': typeof Demo1RouteWithChildren
   '/demo-2': typeof Demo2Route
   '/demo-1/about': typeof Demo1AboutRoute
+  '/demo-1/contact': typeof Demo1ContactRoute
+  '/demo-1/services': typeof Demo1ServicesRoute
   '/demo-1/': typeof Demo1IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo-2': typeof Demo2Route
   '/demo-1/about': typeof Demo1AboutRoute
+  '/demo-1/contact': typeof Demo1ContactRoute
+  '/demo-1/services': typeof Demo1ServicesRoute
   '/demo-1': typeof Demo1IndexRoute
 }
 export interface FileRoutesById {
@@ -60,14 +76,37 @@ export interface FileRoutesById {
   '/demo-1': typeof Demo1RouteWithChildren
   '/demo-2': typeof Demo2Route
   '/demo-1/about': typeof Demo1AboutRoute
+  '/demo-1/contact': typeof Demo1ContactRoute
+  '/demo-1/services': typeof Demo1ServicesRoute
   '/demo-1/': typeof Demo1IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo-1' | '/demo-2' | '/demo-1/about' | '/demo-1/'
+  fullPaths:
+    | '/'
+    | '/demo-1'
+    | '/demo-2'
+    | '/demo-1/about'
+    | '/demo-1/contact'
+    | '/demo-1/services'
+    | '/demo-1/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo-2' | '/demo-1/about' | '/demo-1'
-  id: '__root__' | '/' | '/demo-1' | '/demo-2' | '/demo-1/about' | '/demo-1/'
+  to:
+    | '/'
+    | '/demo-2'
+    | '/demo-1/about'
+    | '/demo-1/contact'
+    | '/demo-1/services'
+    | '/demo-1'
+  id:
+    | '__root__'
+    | '/'
+    | '/demo-1'
+    | '/demo-2'
+    | '/demo-1/about'
+    | '/demo-1/contact'
+    | '/demo-1/services'
+    | '/demo-1/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -113,16 +152,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Demo1AboutRouteImport
       parentRoute: typeof Demo1Route
     }
+    '/demo-1/contact': {
+      id: '/demo-1/contact'
+      path: '/contact'
+      fullPath: '/demo-1/contact'
+      preLoaderRoute: typeof Demo1ContactRouteImport
+      parentRoute: typeof Demo1Route
+    }
+    '/demo-1/services': {
+      id: '/demo-1/services'
+      path: '/services'
+      fullPath: '/demo-1/services'
+      preLoaderRoute: typeof Demo1ServicesRouteImport
+      parentRoute: typeof Demo1Route
+    }
   }
 }
 
 interface Demo1RouteChildren {
   Demo1AboutRoute: typeof Demo1AboutRoute
+  Demo1ContactRoute: typeof Demo1ContactRoute
+  Demo1ServicesRoute: typeof Demo1ServicesRoute
   Demo1IndexRoute: typeof Demo1IndexRoute
 }
 
 const Demo1RouteChildren: Demo1RouteChildren = {
   Demo1AboutRoute: Demo1AboutRoute,
+  Demo1ContactRoute: Demo1ContactRoute,
+  Demo1ServicesRoute: Demo1ServicesRoute,
   Demo1IndexRoute: Demo1IndexRoute,
 }
 
