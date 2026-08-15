@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Demo1RouteImport } from './routes/demo-1'
+import { Route as Demo2RouteImport } from './routes/demo-2'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Demo1Route = Demo1RouteImport.update({
+  id: '/demo-1',
+  path: '/demo-1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Demo2Route = Demo2RouteImport.update({
+  id: '/demo-2',
+  path: '/demo-2',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/demo-1': typeof Demo1Route
+  '/demo-2': typeof Demo2Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/demo-1': typeof Demo1Route
+  '/demo-2': typeof Demo2Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/demo-1': typeof Demo1Route
+  '/demo-2': typeof Demo2Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/demo-1' | '/demo-2'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/demo-1' | '/demo-2'
+  id: '__root__' | '/' | '/demo-1' | '/demo-2'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  Demo1Route: typeof Demo1Route
+  Demo2Route: typeof Demo2Route
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo-1': {
+      id: '/demo-1'
+      path: '/demo-1'
+      fullPath: '/demo-1'
+      preLoaderRoute: typeof Demo1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo-2': {
+      id: '/demo-2'
+      path: '/demo-2'
+      fullPath: '/demo-2'
+      preLoaderRoute: typeof Demo2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  Demo1Route: Demo1Route,
+  Demo2Route: Demo2Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
