@@ -7,9 +7,9 @@ import { practiceAreas } from "@/content/harrington";
 
 const nav = [
   { to: "/demo-1", label: "Home", exact: true },
-  { to: "/demo-1/about", label: "About" },
-  { to: "/demo-1/services", label: "Services" },
-  { to: "/demo-1/contact", label: "Contact" },
+  { to: "/demo-1/about", label: "About", exact: false },
+  { to: "/demo-1/services", label: "Services", exact: false },
+  { to: "/demo-1/contact", label: "Contact", exact: false },
 ] as const;
 
 function Wordmark({ tone = "dark" }: { tone?: "dark" | "light" }) {
@@ -51,7 +51,7 @@ export function HarringtonHeader() {
             <Link
               key={item.to}
               to={item.to}
-              activeOptions={{ exact: item.exact ?? false }}
+              activeOptions={{ exact: item.exact }}
               className="group relative py-2 text-[0.78rem] tracking-[0.16em] text-foreground/80 uppercase transition-colors hover:text-primary data-[status=active]:text-primary"
             >
               {item.label}
@@ -114,7 +114,7 @@ export function HarringtonHeader() {
                 <li key={item.to}>
                   <Link
                     to={item.to}
-                    activeOptions={{ exact: item.exact ?? false }}
+                    activeOptions={{ exact: item.exact }}
                     onClick={() => setOpen(false)}
                     className="block border-b border-white/10 py-4 font-display text-2xl text-surface-foreground transition-colors data-[status=active]:text-brand"
                   >
@@ -180,7 +180,7 @@ export function HarringtonFooter() {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  activeOptions={{ exact: item.exact ?? false }}
+                  activeOptions={{ exact: item.exact }}
                   className="transition-colors hover:text-surface-foreground"
                 >
                   {item.label}

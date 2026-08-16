@@ -30,12 +30,12 @@ export function PrimaryLink({
 }: {
   to: string;
   children: ReactNode;
-  hash?: string;
+  hash?: string | undefined;
 }) {
   return (
     <Link
       to={to}
-      hash={hash}
+      {...(hash ? { hash } : {})}
       className={`${btnBase} bg-primary text-primary-foreground hover:bg-brand hover:text-brand-foreground active:translate-y-px`}
     >
       {children}
@@ -52,13 +52,13 @@ export function SecondaryLink({
 }: {
   to: string;
   children: ReactNode;
-  hash?: string;
-  tone?: "light";
+  hash?: string | undefined;
+  tone?: "light" | undefined;
 }) {
   return (
     <Link
       to={to}
-      hash={hash}
+      {...(hash ? { hash } : {})}
       className={`${btnBase} border ${
         tone === "light"
           ? "border-white/30 text-surface-foreground hover:border-brand hover:text-brand"
@@ -588,10 +588,10 @@ function Field({
   label: string;
   value: string;
   onChange: (value: string) => void;
-  error?: string;
-  type?: string;
-  required?: boolean;
-  autoComplete?: string;
+  error?: string | undefined;
+  type?: string | undefined;
+  required?: boolean | undefined;
+  autoComplete?: string | undefined;
 }) {
   return (
     <div>
