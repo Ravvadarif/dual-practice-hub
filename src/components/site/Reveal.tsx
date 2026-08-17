@@ -3,9 +3,9 @@ import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: ReactNode;
-  className?: string;
-  as?: ElementType;
-  delay?: number;
+  className?: string | undefined;
+  as?: ElementType | undefined;
+  delay?: number | undefined;
 };
 
 /** Lightweight IntersectionObserver fade-up. No animation library. */

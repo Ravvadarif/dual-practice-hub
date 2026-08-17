@@ -16,6 +16,10 @@ import { Route as Demo1IndexRouteImport } from './routes/demo-1.index'
 import { Route as Demo1AboutRouteImport } from './routes/demo-1.about'
 import { Route as Demo1ContactRouteImport } from './routes/demo-1.contact'
 import { Route as Demo1ServicesRouteImport } from './routes/demo-1.services'
+import { Route as Demo2IndexRouteImport } from './routes/demo-2.index'
+import { Route as Demo2AboutRouteImport } from './routes/demo-2.about'
+import { Route as Demo2ContactRouteImport } from './routes/demo-2.contact'
+import { Route as Demo2ServicesRouteImport } from './routes/demo-2.services'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,33 +56,64 @@ const Demo1ServicesRoute = Demo1ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => Demo1Route,
 } as any)
+const Demo2IndexRoute = Demo2IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => Demo2Route,
+} as any)
+const Demo2AboutRoute = Demo2AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => Demo2Route,
+} as any)
+const Demo2ContactRoute = Demo2ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => Demo2Route,
+} as any)
+const Demo2ServicesRoute = Demo2ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => Demo2Route,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demo-1': typeof Demo1RouteWithChildren
-  '/demo-2': typeof Demo2Route
+  '/demo-2': typeof Demo2RouteWithChildren
   '/demo-1/about': typeof Demo1AboutRoute
   '/demo-1/contact': typeof Demo1ContactRoute
   '/demo-1/services': typeof Demo1ServicesRoute
+  '/demo-2/about': typeof Demo2AboutRoute
+  '/demo-2/contact': typeof Demo2ContactRoute
+  '/demo-2/services': typeof Demo2ServicesRoute
   '/demo-1/': typeof Demo1IndexRoute
+  '/demo-2/': typeof Demo2IndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo-2': typeof Demo2Route
   '/demo-1/about': typeof Demo1AboutRoute
   '/demo-1/contact': typeof Demo1ContactRoute
   '/demo-1/services': typeof Demo1ServicesRoute
+  '/demo-2/about': typeof Demo2AboutRoute
+  '/demo-2/contact': typeof Demo2ContactRoute
+  '/demo-2/services': typeof Demo2ServicesRoute
   '/demo-1': typeof Demo1IndexRoute
+  '/demo-2': typeof Demo2IndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/demo-1': typeof Demo1RouteWithChildren
-  '/demo-2': typeof Demo2Route
+  '/demo-2': typeof Demo2RouteWithChildren
   '/demo-1/about': typeof Demo1AboutRoute
   '/demo-1/contact': typeof Demo1ContactRoute
   '/demo-1/services': typeof Demo1ServicesRoute
+  '/demo-2/about': typeof Demo2AboutRoute
+  '/demo-2/contact': typeof Demo2ContactRoute
+  '/demo-2/services': typeof Demo2ServicesRoute
   '/demo-1/': typeof Demo1IndexRoute
+  '/demo-2/': typeof Demo2IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,15 +124,22 @@ export interface FileRouteTypes {
     | '/demo-1/about'
     | '/demo-1/contact'
     | '/demo-1/services'
+    | '/demo-2/about'
+    | '/demo-2/contact'
+    | '/demo-2/services'
     | '/demo-1/'
+    | '/demo-2/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/demo-2'
     | '/demo-1/about'
     | '/demo-1/contact'
     | '/demo-1/services'
+    | '/demo-2/about'
+    | '/demo-2/contact'
+    | '/demo-2/services'
     | '/demo-1'
+    | '/demo-2'
   id:
     | '__root__'
     | '/'
@@ -106,13 +148,17 @@ export interface FileRouteTypes {
     | '/demo-1/about'
     | '/demo-1/contact'
     | '/demo-1/services'
+    | '/demo-2/about'
+    | '/demo-2/contact'
+    | '/demo-2/services'
     | '/demo-1/'
+    | '/demo-2/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   Demo1Route: typeof Demo1RouteWithChildren
-  Demo2Route: typeof Demo2Route
+  Demo2Route: typeof Demo2RouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -166,6 +212,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Demo1ServicesRouteImport
       parentRoute: typeof Demo1Route
     }
+    '/demo-2/': {
+      id: '/demo-2/'
+      path: '/'
+      fullPath: '/demo-2/'
+      preLoaderRoute: typeof Demo2IndexRouteImport
+      parentRoute: typeof Demo2Route
+    }
+    '/demo-2/about': {
+      id: '/demo-2/about'
+      path: '/about'
+      fullPath: '/demo-2/about'
+      preLoaderRoute: typeof Demo2AboutRouteImport
+      parentRoute: typeof Demo2Route
+    }
+    '/demo-2/contact': {
+      id: '/demo-2/contact'
+      path: '/contact'
+      fullPath: '/demo-2/contact'
+      preLoaderRoute: typeof Demo2ContactRouteImport
+      parentRoute: typeof Demo2Route
+    }
+    '/demo-2/services': {
+      id: '/demo-2/services'
+      path: '/services'
+      fullPath: '/demo-2/services'
+      preLoaderRoute: typeof Demo2ServicesRouteImport
+      parentRoute: typeof Demo2Route
+    }
   }
 }
 
@@ -185,10 +259,26 @@ const Demo1RouteChildren: Demo1RouteChildren = {
 
 const Demo1RouteWithChildren = Demo1Route._addFileChildren(Demo1RouteChildren)
 
+interface Demo2RouteChildren {
+  Demo2AboutRoute: typeof Demo2AboutRoute
+  Demo2ContactRoute: typeof Demo2ContactRoute
+  Demo2ServicesRoute: typeof Demo2ServicesRoute
+  Demo2IndexRoute: typeof Demo2IndexRoute
+}
+
+const Demo2RouteChildren: Demo2RouteChildren = {
+  Demo2AboutRoute: Demo2AboutRoute,
+  Demo2ContactRoute: Demo2ContactRoute,
+  Demo2ServicesRoute: Demo2ServicesRoute,
+  Demo2IndexRoute: Demo2IndexRoute,
+}
+
+const Demo2RouteWithChildren = Demo2Route._addFileChildren(Demo2RouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   Demo1Route: Demo1RouteWithChildren,
-  Demo2Route: Demo2Route,
+  Demo2Route: Demo2RouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
