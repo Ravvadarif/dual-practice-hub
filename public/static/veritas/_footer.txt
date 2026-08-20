@@ -1,0 +1,53 @@
+<footer class="site-footer">
+<div class="shell footer-grid">
+  <div class="footer-about">
+    <span class="wordmark light"><span class="mark" aria-hidden="true">V</span><span class="word">Veritas <span class="muted">Legal</span></span></span>
+    <p>Modern Legal Thinking. Meaningful Results. A modern practice advising businesses, professionals and families across twelve areas of law.</p>
+    <div class="footer-social">
+      <a href="#" aria-label="Veritas Legal on LinkedIn">in</a>
+      <a href="#" aria-label="Veritas Legal on X">X</a>
+      <a href="#" aria-label="Veritas Legal on Instagram">IG</a>
+    </div>
+  </div>
+  <nav aria-label="Footer navigation">
+    <h2>Explore Demo</h2>
+    <ul class="footer-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="../index.html">All demos</a></li>
+    </ul>
+  </nav>
+  <div>
+    <h2>Services</h2>
+    <ul class="footer-list">
+      <li><a href="services.html#business-corporate">Business &amp; Corporate</a></li>
+      <li><a href="services.html#disputes-litigation">Disputes &amp; Litigation</a></li>
+      <li><a href="services.html#employment">Employment</a></li>
+      <li><a href="services.html#real-estate">Real Estate</a></li>
+      <li><a href="services.html#family-private-client">Family &amp; Private Client</a></li>
+      <li><a href="services.html#estate-planning">Estate Planning</a></li>
+    </ul>
+  </div>
+  <div>
+    <h2>Contact</h2>
+    <ul class="footer-list">
+      <li><span>540 Market Street, Suite 900</span><span>San Francisco, CA 94104</span></li>
+      <li><a href="tel:+14155550142">+1 (415) 555-0142</a></li>
+      <li><a href="mailto:hello@veritaslegal.example">hello@veritaslegal.example</a></li>
+    </ul>
+  </div>
+</div>
+<div class="shell">
+  <div class="footer-bottom">
+    <p>© 2026 Veritas Legal. All rights reserved.</p>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">Disclaimer</a></li>
+    </ul>
+  </div>
+  <p class="footer-disclaimer">Website content is provided for demonstration purposes only and does not constitute legal advice. Veritas Legal is a fictional firm created for this template; all names, statistics and contact details are illustrative.</p>
+</div>
+</footer>
